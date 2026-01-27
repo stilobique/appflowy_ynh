@@ -66,6 +66,14 @@ ynh_config_add --template="appflowy_web.env" --destination="$install_dir/appflow
 chmod 400 "$install_dir/appflowy_web/.env"
 chown "$app:$app" "$install_dir/appflowy_web/.env"
 
+# We need to authorize the new domain in the web app vite config -> replace the allowedHosts entry
+pushd "$install_dir/appflowy_web"
+    # We don't know how to get the old domain value, so this doesn't work
+    #ynh_replace --match="allowedHosts: ['$old_domain']" --replace="allowedHosts: ['$domain']" --file="vite.config.ts"
+    # So we just add the new domain to the allowedHosts array
+    ynh_replace --match="allowedHosts: \[" --replace="allowedHosts: ['$domain'," --file="vite.config.ts"
+popd
+
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
