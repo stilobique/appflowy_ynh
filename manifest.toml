@@ -95,7 +95,7 @@ ram.runtime = "50M"
     minio_console.default = 9001
     gotrue.default = 9999
     cloud.default = 8000
-    admin_frontend.default = 3000
+    admin_frontend.default = 3002
     ai.default = 5001
     web.default = 3001
 
